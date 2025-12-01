@@ -3,6 +3,8 @@
 #include "CoreMinimal.h"
 #include "AssetDefinitionDefault.h"
 #include "CustomGraphAsset.h"
+#include "CustomGraphEditorToolkit.h"
+#include "Toolkits/AssetEditorToolkit.h"
 #include "CustomGraphAssetDefinition.generated.h"
 
 UCLASS()
@@ -31,4 +33,6 @@ public:
     {
         return FLinearColor(0.0f, 0.8f, 1.0f);
     }
+
+    virtual EAssetCommandResult OpenAssets(const FAssetOpenArgs& OpenArgs) const override;
 };

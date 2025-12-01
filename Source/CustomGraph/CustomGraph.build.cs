@@ -19,7 +19,11 @@ public class CustomGraph : ModuleRules
             "AssetTools",
             "EditorSubsystem",
             "EditorFramework",
-            "AssetDefinition"
+            "AssetDefinition",
+            "Slate",
+            "SlateCore",
+            "GraphEditor",
+            "EditorStyle"
         });
 
     }
