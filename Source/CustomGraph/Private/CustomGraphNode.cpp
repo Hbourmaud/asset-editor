@@ -3,9 +3,9 @@
 
 void UCustomGraphNode::AllocateDefaultPins()
 {
-    CreatePin(EGPD_Input, TEXT("CustomPinType"), TEXT("In"));
+    CreatePin(EGPD_Input, TEXT("Float"), TEXT("Input"));
 
-    CreatePin(EGPD_Output, TEXT("CustomPinType"), TEXT("Out"));
+    CreatePin(EGPD_Output, TEXT("Float"), TEXT("Output"));
 }
 
 FText UCustomGraphNode::GetNodeTitle(ENodeTitleType::Type TitleType) const

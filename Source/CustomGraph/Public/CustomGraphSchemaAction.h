@@ -22,10 +22,14 @@ public:
         bool bSelectNewNode
     ) override
     {
-        UCustomGraphNode* Node = NewObject<UCustomGraphNode>(ParentGraph);
+        UCustomGraphNode* Node = NewObject<UCustomGraphNode>(ParentGraph, UCustomGraphNode::StaticClass());
         Node->NodePosX = Location.X;
         Node->NodePosY = Location.Y;
+
+        Node->AllocateDefaultPins();
+
         ParentGraph->AddNode(Node);
+
         return Node;
     }
 };

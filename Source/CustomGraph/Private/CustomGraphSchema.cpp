@@ -3,14 +3,6 @@
 #include "EdGraph/EdGraphPin.h"
 #include "EdGraph/EdGraph.h"
 
-void UCustomGraphSchema::CreateDefaultNodesForGraph(UEdGraph& Graph) const
-{
-    UCustomGraphNode* Node = NewObject<UCustomGraphNode>(&Graph);
-    Node->NodePosX = 0;
-    Node->NodePosY = 0;
-    Graph.AddNode(Node);
-}
-
 const FPinConnectionResponse UCustomGraphSchema::CanCreateConnection(const UEdGraphPin* A, const UEdGraphPin* B) const
 {
     if (A == B)
