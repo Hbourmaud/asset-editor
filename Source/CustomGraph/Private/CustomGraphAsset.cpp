@@ -19,6 +19,8 @@ void UCustomGraphAsset::EnsureGraphExists()
         );
     }
 
-    Graph->Schema = UCustomGraphSchema::StaticClass();
-    UE_LOG(LogTemp, Warning, TEXT("Runtime schema: %s"), *Graph->GetSchema()->GetName());
+    if (!Graph->Schema)
+    {
+        Graph->Schema = UCustomGraphSchema::StaticClass();
+    }
 }

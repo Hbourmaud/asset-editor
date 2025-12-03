@@ -10,4 +10,7 @@ class CUSTOMGRAPH_API UCustomGraph : public UEdGraph
     GENERATED_BODY()
 
 public:
+    UCustomGraph();
+
+    virtual void PostInitProperties() override;
 };

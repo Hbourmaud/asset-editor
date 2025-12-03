@@ -56,13 +56,15 @@ TSharedRef<SGraphEditor> FCustomGraphEditorToolkit::CreateGraphEditor()
 
     SGraphEditor::FGraphEditorEvents GraphEvents;
 
-    UE_LOG(LogTemp, Warning, TEXT("Runtime schema aaa = %s"), *EditingGraph->GetSchema()->GetName());
-
-    return SNew(SGraphEditor)
+    TSharedRef<SGraphEditor> GraphEditor = SNew(SGraphEditor)
         .GraphToEdit(EditingGraph)
         .Appearance(AppearanceInfo)
         .GraphEvents(GraphEvents)
         .IsEditable(true);
+
+    GraphEditorWidget = GraphEditor;
+
+    return GraphEditor;
 }
 
 FName FCustomGraphEditorToolkit::GetToolkitFName() const
@@ -87,32 +89,35 @@ FLinearColor FCustomGraphEditorToolkit::GetWorldCentricTabColorScale() const
 
 void FCustomGraphEditorToolkit::RegisterTabSpawners(const TSharedRef<FTabManager>& InTabManager)
 {
-    FAssetEditorToolkit::RegisterTabSpawners(InTabManager);
+        WorkspaceMenuCategory = InTabManager->AddLocalWorkspaceMenuCategory(
+            LOCTEXT("WorkspaceMenu_CustomGraphEditor", "Custom Graph Editor"));
 
-    if (!InTabManager->HasTabSpawner(GraphEditorTabId))
-    {
+        FAssetEditorToolkit::RegisterTabSpawners(InTabManager);
+
         InTabManager->RegisterTabSpawner(GraphEditorTabId,
-            FOnSpawnTab::CreateLambda([this](const FSpawnTabArgs&)
-                {
-                    if (!EditingGraph)
-                    {
-                        return SNew(SDockTab)
-                            .Label(LOCTEXT("GraphTab", "Graph"));
-                    }
-
-                    return SNew(SDockTab)
-                        .Label(LOCTEXT("GraphTab", "Graph"))
-                        [
-                            CreateGraphEditor()
-                        ];
-                }));
-    }
+            FOnSpawnTab::CreateSP(this, &FCustomGraphEditorToolkit::SpawnTab_GraphEditor))
+            .SetDisplayName(LOCTEXT("GraphTab", "Graph"))
+            .SetGroup(WorkspaceMenuCategory.ToSharedRef())
+            .SetIcon(FSlateIcon(FAppStyle::GetAppStyleSetName(), "GraphEditor.EventGraph_16x"));
 }
 
 void FCustomGraphEditorToolkit::UnregisterTabSpawners(const TSharedRef<FTabManager>& InTabManager)
 {
     FAssetEditorToolkit::UnregisterTabSpawners(InTabManager);
     InTabManager->UnregisterTabSpawner(GraphEditorTabId);
+}
+
+TSharedRef<SDockTab> FCustomGraphEditorToolkit::SpawnTab_GraphEditor(const FSpawnTabArgs& Args)
+{
+    check(Args.GetTabId() == GraphEditorTabId);
+
+    TSharedRef<SDockTab> SpawnedTab = SNew(SDockTab)
+        .Label(LOCTEXT("GraphEditorTitle", "Graph"))
+        [
+            CreateGraphEditor()
+        ];
+
+    return SpawnedTab;
 }
 
 #undef LOCTEXT_NAMESPACE

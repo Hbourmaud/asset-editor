@@ -8,17 +8,11 @@ class SCustomGraphPin : public SGraphPin
 {
 public:
 	SLATE_BEGIN_ARGS(SCustomGraphPin) {}
-		SLATE_ARGUMENT(UEdGraphPin*, PinObj)
 	SLATE_END_ARGS()
 
-	void Construct(const FArguments& InArgs);
+	void Construct(const FArguments& InArgs, UEdGraphPin* InPin);
 
 protected:
-	virtual TSharedRef<FDragDropOperation> SpawnPinDragEvent(
-		const TSharedRef<class SGraphPanel>& InGraphPanel,
-		const TArray<TSharedRef<SGraphPin>>& InStartingPins
-	) override;
-
 	virtual const FSlateBrush* GetPinIcon() const override
 	{
 		return SGraphPin::GetPinIcon();

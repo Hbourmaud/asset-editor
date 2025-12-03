@@ -2,18 +2,9 @@
 #include "SGraphPanel.h"
 #include "EdGraph/EdGraphPin.h"
 
-void SCustomGraphPin::Construct(const FArguments& InArgs)
+void SCustomGraphPin::Construct(const FArguments& InArgs, UEdGraphPin* InPin)
 {
-	UEdGraphPin* Pin = InArgs._PinObj;
-	check(Pin);
+	check(InPin);
 
-	SGraphPin::Construct(SGraphPin::FArguments(), Pin);
-}
-
-TSharedRef<FDragDropOperation> SCustomGraphPin::SpawnPinDragEvent(
-	const TSharedRef<SGraphPanel>& InGraphPanel,
-	const TArray<TSharedRef<SGraphPin>>& InStartingPins
-)
-{
-	return SGraphPin::SpawnPinDragEvent(InGraphPanel, InStartingPins);
+	SGraphPin::Construct(SGraphPin::FArguments(), InPin);
 }

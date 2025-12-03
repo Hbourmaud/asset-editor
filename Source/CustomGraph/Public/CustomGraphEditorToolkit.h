@@ -27,6 +27,8 @@ public:
 private:
     TSharedRef<class SGraphEditor> CreateGraphEditor();
 
+    TSharedRef<SDockTab> SpawnTab_GraphEditor(const FSpawnTabArgs& Args);
+
     UEdGraph* EditingGraph = nullptr;
     UCustomGraphAsset* GraphAsset = nullptr;
 

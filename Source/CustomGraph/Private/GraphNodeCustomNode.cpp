@@ -4,7 +4,7 @@ void SGraphNodeCustomNode::Construct(const FArguments& InArgs, UEdGraphNode* InN
 {
     GraphNode = InNode;
 
-    SGraphNode::Construct();
+    SetCursor(EMouseCursor::CardinalCross);
     UpdateGraphNode();
 }
 
@@ -12,7 +12,11 @@ void SGraphNodeCustomNode::CreatePinWidgets()
 {
     for (UEdGraphPin* Pin : GraphNode->Pins)
     {
-        TSharedPtr<SGraphPin> NewPin = CreatePinWidget(Pin);
-        AddPin(NewPin.ToSharedRef());
+        if (Pin && !Pin->bHidden)
+        {
+            TSharedPtr<SGraphPin> NewPin = SNew(SCustomGraphPin, Pin);
+
+            this->AddPin(NewPin.ToSharedRef());
+        }
     }
 }
