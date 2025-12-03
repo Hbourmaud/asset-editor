@@ -10,7 +10,6 @@ class CUSTOMGRAPH_API UCustomGraphNode : public UEdGraphNode
     GENERATED_BODY()
 
 public:
-
     virtual void AllocateDefaultPins() override;
 
     virtual FText GetNodeTitle(ENodeTitleType::Type TitleType) const override;
@@ -19,4 +18,6 @@ public:
     {
         return FLinearColor(0.f, 0.8f, 1.f);
     }
+
+    virtual TSharedPtr<SGraphNode> CreateVisualWidget() override;
 };

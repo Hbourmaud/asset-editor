@@ -6,8 +6,6 @@ UCustomGraphFactory::UCustomGraphFactory()
     SupportedClass = UCustomGraphAsset::StaticClass();
     bCreateNew = true;
     bEditAfterNew = true;
-
-    UE_LOG(LogTemp, Warning, TEXT("CustomGraphFactory loaded"));
 }
 
 UObject* UCustomGraphFactory::FactoryCreateNew(

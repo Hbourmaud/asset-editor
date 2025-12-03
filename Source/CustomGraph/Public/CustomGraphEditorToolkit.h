@@ -10,7 +10,6 @@ class UEdGraph;
 class FCustomGraphEditorToolkit : public FAssetEditorToolkit
 {
 public:
-
     void InitEditor(const EToolkitMode::Type Mode,
         const TSharedPtr<class IToolkitHost>& InitToolkitHost,
         UCustomGraphAsset* InGraphAsset);

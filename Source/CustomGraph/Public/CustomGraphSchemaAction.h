@@ -20,16 +20,5 @@ public:
         UEdGraphPin* FromPin,
         const FVector2D Location,
         bool bSelectNewNode
-    ) override
-    {
-        UCustomGraphNode* Node = NewObject<UCustomGraphNode>(ParentGraph, UCustomGraphNode::StaticClass());
-        Node->NodePosX = Location.X;
-        Node->NodePosY = Location.Y;
-
-        Node->AllocateDefaultPins();
-
-        ParentGraph->AddNode(Node);
-
-        return Node;
-    }
+    ) override;
 };

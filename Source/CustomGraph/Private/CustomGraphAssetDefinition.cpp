@@ -9,6 +9,7 @@ EAssetCommandResult UAssetDefinition_CustomGraph::OpenAssets(const FAssetOpenArg
         {
             TSharedRef<FCustomGraphEditorToolkit> Editor =
                 MakeShared<FCustomGraphEditorToolkit>();
+
             Editor->InitEditor(
                 EToolkitMode::Standalone,
                 OpenArgs.ToolkitHost,
